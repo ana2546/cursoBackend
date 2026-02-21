@@ -1,0 +1,20 @@
+{
+  "name": "mi-cli-tutorial",
+  "version": "1.0.0",
+  "description": "CLI demostrativo",
+  "keywords": [
+    "CLI",
+    "Typescrip"
+  ],
+  
+  "license": "ISC",
+  "author": "Anabella Romero",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    
+    
+    "start": "ts-node src/index.ts"
+  }
+  
+}
