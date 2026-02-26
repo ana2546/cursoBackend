@@ -4,12 +4,13 @@ import express, { Request, Response } from 'express';
 import path from 'path';
 import { engine } from 'express-handlebars';
 import viewsRouter from './routes/views.routes';
+import usersRouter from './routes/users.routes';
 
 // Creamos la instancia principal de la aplicación Express
 const app = express();
 
 // Definimos el puerto donde va a escuchar el servidor
-const PORT = 5000;
+const PORT = 3000;
 
 // Middleware que permite leer JSON en el body de las requests
 app.use(express.json());
@@ -32,14 +33,14 @@ app.use('/handlebars', viewsRouter);
 
 
 
-
-
-
-
-
-
 // Endpoint GET raíz  A partir de aca todos los endpoints van a irdesde /api/
-// URL: http://localhost:3000/
+// URL: http://localhost:5000/
+
+
+app.use('/api/users', usersRouter);
+
+
+
 app.get('/api', (req: Request, res: Response) => {
   // Respondemos con un objeto JSON simple
     res.json( { message: 'Servidor funcionando 🚀' } );
