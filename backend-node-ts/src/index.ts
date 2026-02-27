@@ -2,6 +2,7 @@
 // Esto nos permite tipar correctamente los parámetros de las rutas
 import express, { Request, Response } from 'express';
 import path from 'path';
+import 'dotenv/config';
 import { engine } from 'express-handlebars';
 import viewsRouter from './routes/views.routes';
 import usersRouter from './routes/users.routes';
