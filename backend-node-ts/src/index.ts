@@ -6,6 +6,8 @@ import 'dotenv/config';
 import { engine } from 'express-handlebars';
 import viewsRouter from './routes/views.routes';
 import usersRouter from './routes/users.routes';
+import productsRouter from './routes/products.routes';
+
 
 // Creamos la instancia principal de la aplicación Express
 const app = express();
@@ -31,6 +33,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Rutas de vistas
 app.use('/handlebars', viewsRouter);
+
+
+app.use('/products', productsRouter);
 
 
 
