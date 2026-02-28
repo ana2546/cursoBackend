@@ -54,11 +54,21 @@
 
 <script>
   const form = document.getElementById('product-form');
-  form.addEventListener('submit', async (event) => { event.preventDefault(); //
-  ⛔ evita el redirect const formData = new FormData(form); const data =
-  Object.fromEntries(formData.entries()); const response = await
-  fetch('/products/create', { method: 'POST', headers: { 'Content-Type':
-  'application/json' }, body: JSON.stringify(data) }); if (response.ok) {
-  alert('Producto agregado correctamente'); window.location.reload(); // simple,
-  luego se puede mejorar } else { alert('Error al agregar producto'); } });
+  form.addEventListener('submit', async (event) => { 
+    event.preventDefault(); //⛔ evita el redirect 
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries()); 
+    const response = await  fetch('/products/create', 
+          { method: 'POST', headers: { 
+            'Content-Type':
+            'application/json' 
+          }, body: JSON.stringify(data) 
+          });
+    if (response.ok) {
+      alert('Producto agregado correctamente');
+      window.location.reload(); // simple,luego se puede mejorar 
+    } else {
+      alert('Error al agregar producto'); 
+    } 
+  });
 </script>
