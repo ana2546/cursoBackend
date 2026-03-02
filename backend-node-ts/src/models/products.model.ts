@@ -1,5 +1,7 @@
 import pool from '../database/mysql';
 import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader } from 'mysql2';
+
 
 
 
@@ -20,6 +22,14 @@ export interface CreateProductDTO {
   category_id: number;
 }
 
+export interface updateProductDTO {
+  name: string;
+  price: number;
+  quantity: number;
+  category: number;
+}
+
+
 // Tipo específico para MySQL
 export type ProductRow = Product & RowDataPacket;
 
@@ -36,8 +46,45 @@ export const getAllProducts = async (): Promise<Product[]> => {
 export const createProduct = async (data: CreateProductDTO): Promise<void> => {
   const { name, price, quantity, category_id } = data;
 
-  await pool.query(
+  await pool.execute(
     'INSERT INTO products (name, price, quantity, category_id) VALUES (?, ?, ?, ?)',
     [name, price, quantity, category_id]
   );
 };
+
+
+export const deleteProduct = async (id:number): Promise<number> => {
+  const [result] = await pool.execute<ResultSetHeader>(
+    'DELETE FROM products WHERE id = ?', 
+    [id]);
+  return result.affectedRows;
+};
+
+
+export const getProductById = async (id: number) => {
+  const [rows]= await pool.query<(Product & RowDataPacket)[]>(
+    'SELECT * FROM products WHERE id = ?',
+    [id]
+  );
+
+  return rows[0] || null;
+};
+
+
+// export const updateProductById = async (
+//   id: number,
+//   data: updateProductDTO
+// ): Promise<number> => {
+
+//   const [result] = await pool.execute<ResultSetHeader>(
+//     `UPDATE products 
+//      SET name = ?, 
+//          price = ?, 
+//          quantity = ?, 
+//          category_id = ?
+//      WHERE id = ?`,
+//     [data.name, data.price, data.quantity, data.category, id]
+//   );
+
+//   return result.affectedRows;
+// };
