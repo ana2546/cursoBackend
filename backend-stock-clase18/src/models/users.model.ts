@@ -1,12 +1,13 @@
 import pool from '../database/mysql';
 import { RowDataPacket } from 'mysql2';
+import { UserRole } from '../types/auth';
 
 export interface User {
   id: number;
   username: string;
   email: string;
   password: string;
-  role: 'user' | 'admin';
+  role:UserRole;
 }
 
 export type UserRow = User & RowDataPacket;
