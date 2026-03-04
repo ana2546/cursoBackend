@@ -7,7 +7,7 @@ export interface User {
   username: string;
   email: string;
   password: string;
-  role:UserRole;
+  role: UserRole;
 }
 
 export type UserRow = User & RowDataPacket;

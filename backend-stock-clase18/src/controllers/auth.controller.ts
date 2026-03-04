@@ -36,7 +36,7 @@ export const login = async (req: Request, res: Response) => {
     return res.json({ token });
   } catch (error: any) {
     if (error.message === 'Credenciales inválidas') {
-      return res.status(401).json({ error: 'Credenciales inválidas' });
+      return res.status(401).json({ error: error.message });
     }
     return res.status(500).json({ error: 'Error al iniciar sesión' });
   }
