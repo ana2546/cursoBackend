@@ -1,7 +1,7 @@
-// src/types/auth.ts
 export interface JwtPayload {
+  //jsonwebtoken Payload personalizado
   id: number;
-  username:string,
+  username: string;
   role: UserRole;
 }
 

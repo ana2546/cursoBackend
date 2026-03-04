@@ -1,43 +1,45 @@
-// Importamos Express y los tipos Request y Response desde express
-// Esto nos permite tipar correctamente los parámetros de las rutas
 import express, { Request, Response } from 'express';
 import path from 'path';
+
 import 'dotenv/config';
+import authRoutes from './routes/auth.routes';
+import { authenticate, authorize } from './middlewares/auth.middleware';
 
-
-
-
-// Creamos la instancia principal de la aplicación Express
 const app = express();
-
-// Definimos el puerto donde va a escuchar el servidor
 const PORT = process.env.PORT || 3000;
 
-// Middleware que permite leer JSON en el body de las requests
+// Middleware para interpretar JSON
 app.use(express.json());
 
-
-// Configuración del motor de plantillas Handlebars
-
-
-// Middleware para servir archivos estáticos
-// __dirname representa la carpeta actual compilada 
+// Middleware para servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.use('/auth', authRoutes);
 
+app.get('/public', (req: Request, res: Response) => {
+  res.json({
+    message: 'Cualquiera puede entrar!',
+  });
+});
 
-// Endpoint GET /saludo
-// URL: http://localhost:3000/saludo
-// Endpoint de prueba API
+app.get('/protected', authenticate, (req, res) => {
+  res.json({
+    message: 'Acceso permitido',
+  });
+});
+
+// Ruta de administrador (requiere autenticación y rol admin)
+app.get('/admin', authenticate, authorize(['admin']), (req, res) => {
+  res.json({
+    message: 'Acceso de administrador permitido',
+  });
+});
+
 app.get('/api/saludo', (req: Request, res: Response) => {
   res.json({ mensaje: 'Hola desde la API 🚀' });
 });
 
-
-
-
-// Iniciamos el servidor HTTP
-// Si todo está correcto, veremos el mensaje en consola
+// Iniciar el servidor HTTP
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT} 🚀`);
 });
