@@ -1,15 +1,92 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Stock</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <h1>Mini Stock de Productos</h1>
-  
+<head>
+    <meta charset="UTF-8">
+    <title>Veterinaria Patitas</title>
 
-    <script src="app.js"></script>
-  </body>
+    <!-- CSS servido desde /public/css -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <h1>Veterinaria Patitas</h1>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" class="form active">
+
+            <h2>Iniciar Sesión</h2>
+
+            <!-- Tu backend espera email -->
+            <input 
+                type="email"
+                id="loginEmail"
+                placeholder="Email"
+                required
+            >
+
+            <input 
+                type="password"
+                id="loginPassword"
+                placeholder="Contraseña"
+                required
+            >
+
+            <button type="submit">LOGIN</button>
+
+            <p>
+                ¿No tenés cuenta?
+                <span id="showRegister" class="link">Registrate</span>
+            </p>
+
+            <p class="error" id="loginError"></p>
+
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" class="form">
+
+            <h2>Registrarse</h2>
+
+            <input
+                type="text"
+                id="registerUsername"
+                placeholder="Nombre de usuario"
+                required
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Contraseña"
+                required
+            >
+
+            <button type="submit">REGISTER</button>
+
+            <p>
+                ¿Ya tenés cuenta?
+                <span id="showLogin" class="link">Iniciá sesión</span>
+            </p>
+
+            <p class="error" id="registerError"></p>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- JS servido desde /public/js -->
+<script src="/js/app.js"></script>
+
+</body>
 </html>
-

@@ -13,6 +13,17 @@ app.use(express.json());
 
 // Middleware para servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname, '..', 'public')));
+// ruta login (pagina por defecto)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/login.html'));
+});
+
+// ruta register
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/register.html'));
+});
+
+
 
 app.use('/auth', authRoutes);
 
